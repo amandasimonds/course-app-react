@@ -5,6 +5,7 @@ import {BrowserRouter, Route, NavLink, Switch, Redirect} from "react-router-dom"
 import Courses from './containers/Courses/Courses';
 import Users from './containers/Users/Users';
 import Course from "./containers/Course/Course"
+import NoMatch from "./NoMatch"
 
 class App extends Component {
   render () {
@@ -42,8 +43,10 @@ class App extends Component {
         {/* <Route path ="/courses/:courseId" component={Course}/> */}
         <Route path="/courses" component={Courses}/>
         
-        {/* <Redirect from="/" to="/posts"/> */}
-        <Route render={()=> <h1>404 not found</h1>}/>
+        <Redirect from="/" to="/courses"/>
+
+        {/* <Route render={()=> <h1>404 not found</h1>}/> */}
+        <Route component={NoMatch}/>
         </Switch>
       </div>
       </BrowserRouter>
