@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 
-import {BrowserRouter, Route, NavLink} from "react-router-dom"
+import {BrowserRouter, Route, NavLink, Switch, Redirect} from "react-router-dom"
 
 import Courses from './containers/Courses/Courses';
 import Users from './containers/Users/Users';
+import Course from "./containers/Course/Course"
 
 class App extends Component {
   render () {
@@ -34,8 +35,13 @@ class App extends Component {
             </li>
           </nav>
         </ul>
+        <Switch>
+
         <Route path ="/users" component={Users}/>
         <Route path="/courses" component={Courses}/>
+        <Route path ="/course" component={Course}/>
+        <Redirect from="/" to="/posts"/>
+        </Switch>
       </div>
       </BrowserRouter>
     );
