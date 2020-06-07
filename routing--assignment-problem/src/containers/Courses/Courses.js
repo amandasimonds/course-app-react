@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link, Route} from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 
 import './Courses.css';
 import Course from "../Course/Course"
@@ -13,31 +13,31 @@ class Courses extends Component {
         ]
     }
 
-    courseSelectedHandler = (id) => {
-        this.props.history.push("/courses/"+ id)
-    }
-    render () {
-        let courses = this.state.courses.map( course => {
-            return (
-            <Link to="/course" component={Course}>
-                <article 
-                    className="Course" 
-                    key={course.id} 
-                    {...this.props}
-                    >
-                        {course.id}{course.title}</article>;
-            </Link>
-            )
-            })
+    render() {
         return (
             <div>
+
                 <h1>Amazing Udemy Courses</h1>
                 <section className="Courses">
-                    {courses}
+                    {this.state.courses.map(course => {
+                        return (
+                        <Link to={{
+                                pathname: this.props.match.url + "/" + course.id,
+                                search: "?courseTitle=" + course.title
+                            }}
+                                key={course.id} component={Course}>
+                                <article
+                                    className="Course"
+                                >
+                                    {course.id}{course.title}</article>;
+                            </Link>
+                            )
+                    })
+                    }
                 </section>
-                <Route path ={this.props.match.url + "/:id"} component={Course}/>
+                <Route path={this.props.match.url + "/:courseId"} component={Course} />
             </div>
-        );
+        )
     }
 }
 
